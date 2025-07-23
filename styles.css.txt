@@ -1,0 +1,101 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    border: 1px solid black;
+}
+
+#ui {
+    margin-left: 20px;
+}
+
+button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.info {
+    margin-bottom: 20px;
+}
+
+#menu {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 2px solid black;
+    padding: 20px;
+}
+
+#menu button {
+    margin: 5px;
+}
+
+#codesMenu input,
+#investmentsMenu input {
+    margin: 10px 0;
+    padding: 5px;
+}
+
+#achievementsMenu div {
+    margin: 10px 0;
+}
+
+#stockGraph {
+    display: none;
+    width: 300px;
+    height: 150px;
+}
+
+#howToPlayMenu {
+    display: none;
+    max-width: 400px;
+}
+
+.close-submenu {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Responzívny dizajn pre mobil */
+@media (max-width: 600px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+    }
+    canvas {
+        width: 90%;
+        height: auto;
+    }
+    #ui {
+        margin-left: 0;
+        text-align: center;
+        margin-top: 10px;
+    }
+    #menu {
+        width: 90%;
+        max-width: 300px;
+    }
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
