@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hraj Poo'n'Pee Simulator a zbieraj Poop Coiny!">
+    <meta name="keywords" content="Poo'n'Pee, simulator, hra, Poop Coiny">
+    <meta name="author" content="Tvoj Meno">
+    <title>Poo'n'Pee Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <div id="ui">
+        <div class="info" id="coins">Poop Coiny: 0</div>
+        <div class="info" id="rectum">Konečník: Úroveň 1</div>
+        <div class="info" id="bladder">Mechúr: Úroveň 1</div>
+        <div class="info" id="toilet">Záchod: Úroveň 1</div>
+        <div class="info" id="food">Jedlo: Jablko</div>
+        <div class="info" id="autoPoop">Auto Kadenie: Neodomknuté</div>
+        <div class="info" id="autoPee">Auto Čúranie: Neodomknuté</div>
+        <div class="info" id="critChance">Critical Hit: Úroveň 1</div>
+        <div class="info" id="poopCooldown">Cooldown Kad: 0s</div>
+        <div class="info" id="peeCooldown">Cooldown Čúr: 0s</div>
+        <button id="poopButton">Kadiť</button>
+        <button id="peeButton">Čúrať</button>
+        <button id="menuButton">Menu</button>
+    </div>
+    <div id="menu">
+        <h2>Menu</h2>
+        <button id="upgradesButton">Upgrady</button>
+        <button id="shopButton">Obchod</button>
+        <button id="catalogButton">Katalóg</button>
+        <button id="codesButton">Kódy</button>
+        <button id="investmentsButton">Investície</button>
+        <button id="achievementsButton">Achievements</button>
+        <button id="howToPlayButton">Ako Hrať</button>
+        <button id="closeMenuButton">Zatvoriť</button>
+        <div id="upgradesMenu" style="display: none;">
+            <h3>Upgrady</h3>
+            <button class="close-submenu" onclick="toggleMenu(true)">X</button>
+            <button id="rectumUpgrade">Upgrade Konečník (100)</button>
+            <button id="bladderUpgrade">Upgrade Mechúr (50)</button>
+            <button id="toiletUpgrade">Upgrade Záchod (200)</button>
+            <button id="autoPoopUpgrade">Odomknúť/Upgrade Auto Kadenie (500)</button>
+            <button id="autoPeeUpgrade">Odomknúť/Upgrade Auto Čúranie (300)</button>
+            <button id="critChanceUpgrade">Upgrade Critical Hit (200)</button>
+        </div>
+        <div id="shopMenu" style="display: none;">
+            <h3>Obchod</h3>
+            <button class="close-submenu" onclick="toggleMenu(true)">X</button>
+            <h4>Jedlá</h4>
+            <button id="foodApple">Jablko (0)</button>
+            <button id="foodMeat">Mäso (150)</button>
+            <button id="foodLaxative">Prejímadlo (500)</button>
+            <button id="foodTaco">Taco Bang (1500)</button>
+            <button id="foodAtomic">Atómová kaša (5000)</button>
+            <h4>Skiny</h4>
+            <button id="skinBasic">Základný (0)</button>
+            <button id="skinGold">Zlatý (1000)</button>
+            <button id="skinDiamond">Diamantový (3000)</button>
+            <button id="skinRuby">Rubínový (5000)</button>
+            <button id="skinEmerald">Smaragdový (8000)</button>
+            <button id="skinOnyx">Onixový (10000)</button>
+        </div>
+        <div id="catalogMenu" style="display: none;">
+            <h3>Katalóg</h3>
+            <button class="close-submenu" onclick="toggleMenu(true)">X</button>
+            <h4>Vybrať Jedlo</h4>
+            <button id="selectApple">Jablko</button>
+            <button id="selectMeat" disabled>Mäso</button>
+            <button id="selectLaxative" disabled>Prejímadlo</button>
+            <button id="selectTaco" disabled>Taco Bang</button>
+            <button id="selectAtomic" disabled>Atómová kaša</button>
+            <button id="selectFarty" disabled>SecretFood1</button>
+            <h4>Vybrať Skin</h4>
+            <button id="selectBasic">Základný</button>
+            <button id="selectGold" disabled>Zlatý</button>
+            <button id="selectDiamond" disabled>Diamantový</button>
+            <button id="selectRuby" disabled>Rubínový</button>
+            <button id="selectEmerald" disabled>Smaragdový</button>
+            <button id="selectOnyx" disabled>Onixový</button>
+            <button id="selectOgpink" disabled>SecretSkin1</button>
+            <h4>Automatické akcie</h4>
+            <button id="toggleAutoPoop" disabled>Auto Kadenie: Vypnuté</button>
+            <button id="toggleAutoPee" disabled>Auto Čúranie: Vypnuté</button>
+        </div>
+        <div id="codesMenu" style="display: none;">
+            <h3>Kódy</h3>
+            <button class="close-submenu" onclick="toggleMenu(true)">X</button>
+            <input type="text" id="codeInput" placeholder="Zadaj kód">
+            <button id="submitCode">Potvrdiť</button>
+            <div id="codeMessage"></div>
+        </div>
+        <div id="investmentsMenu" style="display: none;">
+            <h3>Investície</h3>
+            <button class="close-submenu" onclick="toggleMenu(true)">X</button>
+            <div id="stocks"></div>
+            <h4>Graf cien</h4>
+            <canvas id="stockGraph" width="300" height="150"></canvas>
+            <button id="graphStock0">Tento Papier</button>
+            <button id="graphStock1">Caca Cola</button>
+            <button id="graphStock2">Skibidi Toilet</button>
+            <button id="graphStock3">MineKakať</button>
+            <button id="graphStock4">CikiBook</button>
+        </div>
+        <div id="achievementsMenu" style="display: none;">
+            <h3>Achievements</h3>
+            <button class="close-submenu" onclick="toggleMenu(true)">X</button>
+            <div id="achievementsList"></div>
+        </div>
+        <div id="howToPlayMenu" style="display: none;">
+            <h3>Ako Hrať</h3>
+            <button class="close-submenu" onclick="toggleMenu(true)">X</button>
+            <p>Vitaj v Poo'n'Pee Simulator! Tvoj cieľ je zbierať Poop Coiny kadením a čúraním na záchode.</p>
+            <ul>
+                <li><strong>Kadenie/Čúranie</strong>: Klikni na tlačidlá "Kadiť" (10 coinov × úroveň konečníka × záchod) alebo "Čúrať" (7 coinov × úroveň mechúra × záchod). Cooldown je 5s/3.5s, znížený jedlom. Alebo použi klávesy <strong>K</strong> (Kadiť) a <strong>C</strong> (Čúrať).</li>
+                <li><strong>Upgrady</strong>: Zvyš úroveň konečníka, mechúra, záchoda, Auto Kadenia/Čúrania a Critical Hitu za coiny.</li>
+                <li><strong>Obchod</strong>: Kúp jedlá (znižujú cooldown) a skiny (menia vzhľad záchoda).</li>
+                <li><strong>Katalóg</strong>: Vyber si kúpené jedlo, skin alebo zapni/vypni Auto akcie.</li>
+                <li><strong>Kódy</strong>: Zadaj kódy (napr. "TutorialMoney" pre 250 coinov) na odmeny.</li>
+                <li><strong>Investície</strong>: Kúp/predaj akcie firiem, ktorých ceny kolíšu každých 30s. Sleduj graf cien.</li>
+                <li><strong>Achievements</strong>: Plň úlohy (napr. kúp všetky skiny) pre odmeny.</li>
+            </ul>
+            <p><strong>Klávesové skratky</strong>: Stlač <strong>K</strong> na Kadenie, <strong>C</strong> na Čúranie, <strong>M</strong> na otvorenie Menu, <strong>X</strong> na zatvorenie podmenu alebo celého menu.</p>
+            <p>Hraj, zbieraj coiny a staň sa majstrom záchoda!</p>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>
